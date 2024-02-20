@@ -11,10 +11,8 @@ Fractal::Fractal() : cols(0), rows(0), grid(nullptr)
 Fractal::Fractal(const Fractal& f) : cols(f.cols), rows(f.rows)
 {
 	if (cols == 0 || rows == 0)
-	{
 		this->grid = nullptr;
-		return;
-	}
+		
 	else
 	{
 		cout << "> Copy constructor called..." << endl;
@@ -34,27 +32,19 @@ Fractal::Fractal(Fractal&& f) : cols(f.cols), rows(f.rows), grid(f.grid)
 	f.cols = 0;
 	f.rows = 0;
 	f.grid = nullptr;
-	if (cols == 0 || rows == 0) 
-	{
-		this->grid = nullptr;
-		return;
-	}
 }
 
 Fractal::Fractal(unsigned int colsValue, unsigned int rowsValue) : cols(colsValue), rows(rowsValue)
 {
 	if (cols == 0 || rows == 0)
-	{
 		this->grid = nullptr;
-		return;
-	}
+	
 	else
 	{
 		cout << "> Two-arg constructor called..." << endl;
-		this->grid = new Pixel * [rows];
- 	for (unsigned int i = 0; i < rows; ++i) {
-			this->grid[i] = new Pixel[cols];
-		}
+		this->grid = new Pixel * [cols];
+		for (unsigned int i = 0; i < cols; i++)
+			this->grid[i] = new Pixel[rows];
 		// Generate the Newton fractal
 		makeNewtonFractal();
 	}
@@ -143,9 +133,9 @@ void Fractal::makeNewtonFractal()
 	Complex Z;
 	double step_height = 4.0 / rows;
 	double step_width = 4.0 / cols;
-	for (unsigned int j = 0; j < rows; j++)
+	for (unsigned int j = 0; j < cols; j++)
 	{
-		for (unsigned int k = 0; k < cols; k++)
+		for (unsigned int k = 0; k < rows; k++)
 		{
 			Z["imag"] = 2.0 - (j * step_height);
 			Z["real"] = (k * step_width) - 2.0;
@@ -169,7 +159,7 @@ void saveToPPM(const Fractal& fractal, const string& name)
 
 	for (unsigned int i = 0; i < fractal.cols; i++)
 	{
-		for (unsigned int j = 0; j < fractal.rows; i++)
+		for (unsigned int j = 0; j < fractal.rows; j++)
 		{
 			output << fractal.grid[i][j];
 		}

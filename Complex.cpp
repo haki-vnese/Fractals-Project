@@ -2,28 +2,16 @@
 
 Complex::~Complex()
 {
-	cout << "> Destructor called..." << endl;
+	// leaving blank
 }
 
-Complex::Complex() : real(0.0), imag(0.0)
-{
-	cout << "> Default constructor called..." << endl;
-}
+Complex::Complex() : real(0.0), imag(0.0) {}
 
-Complex::Complex(const Complex& c) : real(c.real), imag(c.imag)
-{
-	cout << "> Copy constructor called..." << endl;
-}
+Complex::Complex(const Complex& c) : real(c.real), imag(c.imag) {}
 
-Complex::Complex(double r) : real(r)
-{
-	cout << "> One-arg constructor called..." << endl;
-}
+Complex::Complex(double r) : real(r), imag(0.0) {}
 
-Complex::Complex(double r, double i) : real(r), imag(i)
-{
-	cout << "> Two-arg constructor called..." << endl;
-}
+Complex::Complex(double r, double i) : real(r), imag(i) {}
 
 double& Complex::operator[](const char* msg)
 {

@@ -4,7 +4,6 @@ Fractal testMoveConstructor(unsigned int rows, unsigned int cols);
 
 int main()
 {
-	
 	Fractal m1(2000U, 2000U), m2, m3;
 	saveToPPM(m1, "newton1.ppm");
 	m2 = Fractal(m1);

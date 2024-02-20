@@ -2,23 +2,14 @@
 
 Pixel::~Pixel()
 {
-	cout << "> Destructor called..." << endl;
+	// leaving blank
 }
 
-Pixel::Pixel() : red(0), green(0), blue(0)
-{
-	cout << "> Default constructor called..." << endl;
-}
+Pixel::Pixel() : red(0), green(0), blue(0) {}
 
-Pixel::Pixel(const Pixel& p) : red(p.red), green(p.green), blue(p.blue)
-{
-	cout << "> Copy constructor called..." << endl;
-}
+Pixel::Pixel(const Pixel& p) : red(p.red), green(p.green), blue(p.blue) {}
 
-Pixel::Pixel(unsigned int r, unsigned int g, unsigned int b) : red(r), green(g), blue(b)
-{
-	cout << "> Three-arg constructor called..." << endl;
-}
+Pixel::Pixel(unsigned int r, unsigned int g, unsigned int b) : red(r), green(g), blue(b) {}
 
 const unsigned int& Pixel::operator[](const char* color) const
 {
