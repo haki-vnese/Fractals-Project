@@ -20,9 +20,16 @@ double& Complex::operator[](const char* msg)
 	else throw InputOutOfBoundsException("Invalid index", msg);
 }
 
+const Complex& Complex::operator=(const Complex& c)
+{
+	this->real = c.real;
+	this->imag = c.imag;
+	return *this;
+}
+
 const Complex operator*(const Complex& c1, const Complex& c2)
 {
-	return (c1.real * c2.real - c1.imag * c2.imag, c1.real * c2.imag + c1.imag * c2.real);
+	return Complex(c1.real * c2.real - c1.imag * c2.imag, c1.real * c2.imag + c1.imag * c2.real);
 }
 
 const Complex operator/(const Complex& c1, const Complex& c2)

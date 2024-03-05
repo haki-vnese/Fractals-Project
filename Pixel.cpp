@@ -38,7 +38,7 @@ ofstream& operator<<(ofstream& os, const Pixel& p)
 {
 	try
 	{
-		os << p["red"] << ' ' << p["green"] << ' ' << p["blue"];
+		os << p["red"] << " " << p["green"] << " " << p["blue"];
 		return os;
 	}
 	catch (const Pixel::InputOutOfBoundsException& e)

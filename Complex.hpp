@@ -14,6 +14,7 @@ public:
 	Complex(double);
 	Complex(double, double);
 	double& operator[](const char*);
+	const Complex& operator=(const Complex&);
 	friend const Complex operator*(const Complex&, const Complex&);
 	friend const Complex operator/(const Complex&, const Complex&);
 	friend const Complex operator+(const Complex&, const Complex&);

@@ -16,10 +16,10 @@ Fractal::Fractal(const Fractal& f) : cols(f.cols), rows(f.rows)
 	else
 	{
 		cout << "> Copy constructor called..." << endl;
-		this->grid = new Pixel * [rowd];
+		this->grid = new Pixel * [rows];
 		for (unsigned int i = 0; i < rows; i++)
 		{
-			this->grid[i] = new Pixel[cold];
+			this->grid[i] = new Pixel[cols];
 			for (unsigned int j = 0; j < cols; j++)
 				this->grid[i][j] = f.grid[i][j];
 		}
@@ -44,9 +44,13 @@ Fractal::Fractal(unsigned int colsValue, unsigned int rowsValue) : cols(colsValu
 		cout << "> Two-arg constructor called..." << endl;
 		this->grid = new Pixel * [rows];
 		for (unsigned int i = 0; i < rows; i++)
+		{
 			this->grid[i] = new Pixel[cols];
+			for (unsigned int j = 0; j < cols; j++)
+				this->grid[i][j] = Pixel();
+		}
 		// Generate the Newton fractal
-		makeNewtonFractal();
+		this->makeNewtonFractal();
 	}
 }
 
@@ -56,8 +60,12 @@ Fractal::~Fractal()
 	if (this->grid != nullptr)
 	{
 		for (unsigned int i = 0; i < cols; i++)
+		{
 			delete[] this->grid[i];
+			grid[i] = nullptr;
+		}
 		delete[] this->grid;
+		grid = nullptr;
 	}
 }
 
@@ -132,11 +140,10 @@ void Fractal::makeNewtonFractal()
 {
 	cout << "> Now creating the Newton Fractal..." << endl;
 	Complex Z;
-	double step_height = 4.0 / rows;
-	double step_width = 4.0 / cols;
+	double step_height = 4.0 / this->rows;
+	double step_width = 4.0 / this->cols;
 	for (unsigned int j = 0; j < rows; j++)
 	{
-		cout << j + 1 << " " << endl;
 		for (unsigned int k = 0; k < cols; k++)
 		{
 			Z["imag"] = 2.0 - (j * step_height);
