@@ -16,11 +16,11 @@ Fractal::Fractal(const Fractal& f) : cols(f.cols), rows(f.rows)
 	else
 	{
 		cout << "> Copy constructor called..." << endl;
-		this->grid = new Pixel * [cols];
-		for (unsigned int i = 0; i < cols; i++)
+		this->grid = new Pixel * [rowd];
+		for (unsigned int i = 0; i < rows; i++)
 		{
-			this->grid[i] = new Pixel[rows];
-			for (unsigned int j = 0; j < rows; j++)
+			this->grid[i] = new Pixel[cold];
+			for (unsigned int j = 0; j < cols; j++)
 				this->grid[i][j] = f.grid[i][j];
 		}
 	}
@@ -103,7 +103,7 @@ Pixel Fractal::determinePixelColor(Complex Z)
 	const double test = 0.58974;
 	
 	unsigned int iter = 0;
-	int color = 0;
+	unsigned int color = 0;
 	double diff = 1.0;
 	Complex Znew;
 
