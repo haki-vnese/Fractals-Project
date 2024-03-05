@@ -11,7 +11,7 @@ private:
 	unsigned int cols;
 	unsigned int rows;
 	Pixel** grid;
-	unsigned int maxIter;
+	static unsigned int maxIter;
 public:
 	Fractal();
 	Fractal(const Fractal&);

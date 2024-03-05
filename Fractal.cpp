@@ -1,7 +1,7 @@
 #pragma once
 #include "Fractal.hpp"
 
-const unsigned int Fractal::maxIter = 30;
+unsigned int Fractal::maxIter = 30;
 
 Fractal::Fractal() : cols(0), rows(0), grid(nullptr)
 {
@@ -42,9 +42,9 @@ Fractal::Fractal(unsigned int colsValue, unsigned int rowsValue) : cols(colsValu
 	else
 	{
 		cout << "> Two-arg constructor called..." << endl;
-		this->grid = new Pixel * [cols];
-		for (unsigned int i = 0; i < cols; i++)
-			this->grid[i] = new Pixel[rows];
+		this->grid = new Pixel * [rows];
+		for (unsigned int i = 0; i < rows; i++)
+			this->grid[i] = new Pixel[cols];
 		// Generate the Newton fractal
 		makeNewtonFractal();
 	}
@@ -67,7 +67,7 @@ const Fractal& Fractal::operator=(const Fractal& f)
 	{
 		if (this->grid != nullptr)
 		{
-			for (unsigned int i = 0; i < rows; i++)
+			for (unsigned int i = 0; i < cols; i++)
 				delete[] this->grid[i];
 			delete[] this->grid;
 		}
