@@ -52,9 +52,10 @@ Fractal::Fractal(unsigned int colsValue, unsigned int rowsValue) : cols(colsValu
 
 Fractal::~Fractal()
 {
+	cout << "> Destructor called..." << endl;
 	if (this->grid != nullptr)
 	{
-		for (unsigned int i = 0; i < rows; i++)
+		for (unsigned int i = 0; i < cols; i++)
 			delete[] this->grid[i];
 		delete[] this->grid;
 	}
@@ -72,11 +73,11 @@ const Fractal& Fractal::operator=(const Fractal& f)
 		}
 		this->cols = f.cols;
 		this->rows = f.rows;
-		this->grid = new Pixel * [cols];
-		for (unsigned int i = 0; i < cols; i++)
+		this->grid = new Pixel * [rows];
+		for (unsigned int i = 0; i < rows; i++)
 		{
-			this->grid[i] = new Pixel[rows];
-			for (unsigned int j = 0; j < rows; j++)
+			this->grid[i] = new Pixel[cols];
+			for (unsigned int j = 0; j < cols; j++)
 				this->grid[i][j] = f.grid[i][j];
 		}
 	}
@@ -106,7 +107,7 @@ Pixel Fractal::determinePixelColor(Complex Z)
 	double diff = 1.0;
 	Complex Znew;
 
-	while (iter < 512)
+	while (iter < 512) 
 	{
 		iter++;
 		Znew = Z - ((Z * Z * Z) - (2.0 * Z) + 2.0) / ((3.0 * Z * Z) - 2.0);
@@ -115,12 +116,12 @@ Pixel Fractal::determinePixelColor(Complex Z)
 
 		if (diff < tol)
 		{
-			color = maxIter - min(iter, maxIter);
+			color = 512 - min(iter, maxIter);
 			if (abs(Z["imag"]) < tol)
 				return Pixel(color, color, 0);
-			else if (abs(Z["imag"]) - test < tol)
+			else if ((abs(Z["imag"]) - test) < tol)
 				return Pixel(0, color, color);
-			else if (abs(Z["imag"]) + test < tol)
+			else if ((abs(Z["imag"]) + test) < tol)
 				return Pixel(color, 0, color);
 		}
 	}
@@ -133,9 +134,10 @@ void Fractal::makeNewtonFractal()
 	Complex Z;
 	double step_height = 4.0 / rows;
 	double step_width = 4.0 / cols;
-	for (unsigned int j = 0; j < cols; j++)
+	for (unsigned int j = 0; j < rows; j++)
 	{
-		for (unsigned int k = 0; k < rows; k++)
+		cout << j + 1 << " " << endl;
+		for (unsigned int k = 0; k < cols; k++)
 		{
 			Z["imag"] = 2.0 - (j * step_height);
 			Z["real"] = (k * step_width) - 2.0;
@@ -154,12 +156,12 @@ void saveToPPM(const Fractal& fractal, const string& name)
 	}
 	cout << "> Saving Fractal to PPM file..." << endl;
 	output << "P3" << endl;
-	output << fractal.cols << " " << fractal.rows << endl;
+	output << fractal.rows << " " << fractal.cols << endl;
 	output << "255" << endl;
 
-	for (unsigned int i = 0; i < fractal.cols; i++)
+	for (unsigned int i = 0; i < fractal.rows; i++)
 	{
-		for (unsigned int j = 0; j < fractal.rows; j++)
+		for (unsigned int j = 0; j < fractal.cols; j++)
 		{
 			output << fractal.grid[i][j];
 		}

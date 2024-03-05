@@ -8,7 +8,7 @@ int main()
 	saveToPPM(m1, "newton1.ppm");
 	m2 = Fractal(m1);
 	saveToPPM(m2, "newton2.ppm");
-	m3 = testMoveConstructor(600U, 800U);
+ 	m3 = testMoveConstructor(600U, 800U);
 	saveToPPM(m3, "newton3.ppm");
 	return 0;
 }
