@@ -54,7 +54,7 @@ Fractal::~Fractal()
 {
 	if (this->grid != nullptr)
 	{
-		for (unsigned int i = 0; i < rows; i++)
+		for (unsigned int i = 0; i < cols; i++)
 			delete[] this->grid[i];
 		delete[] this->grid;
 	}
