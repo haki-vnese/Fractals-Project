@@ -116,12 +116,12 @@ Pixel Fractal::determinePixelColor(Complex Z)
 
 		if (diff < tol)
 		{
-			color = 512 - min(iter, maxIter);
+			color = maxIter - min(iter, maxIter);
 			if (abs(Z["imag"]) < tol)
 				return Pixel(color, color, 0);
-			else if ((abs(Z["imag"]) - test) < tol)
+			else if (abs(Z["imag"] - test) < tol)
 				return Pixel(0, color, color);
-			else if ((abs(Z["imag"]) + test) < tol)
+			else if (abs(Z["imag"] + test) < tol)
 				return Pixel(color, 0, color);
 		}
 	}
@@ -163,8 +163,9 @@ void saveToPPM(const Fractal& fractal, const string& name)
 	{
 		for (unsigned int j = 0; j < fractal.cols; j++)
 		{
-			output << fractal.grid[i][j];
+			output << fractal.grid[i][j] << " ";
 		}
+		output << endl;
 	}
 	output.close();
 }
