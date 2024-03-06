@@ -34,7 +34,7 @@ Fractal::Fractal(Fractal&& f) : cols(f.cols), rows(f.rows), grid(f.grid)
 	f.grid = nullptr;
 }
 
-Fractal::Fractal(unsigned int colsValue, unsigned int rowsValue) : cols(colsValue), rows(rowsValue)
+Fractal::Fractal(unsigned int rowsValue, unsigned int colsValue) : cols(colsValue), rows(rowsValue)
 {
 	if (cols == 0 || rows == 0)
 		this->grid = nullptr;
@@ -59,13 +59,11 @@ Fractal::~Fractal()
 	cout << "> Destructor called..." << endl;
 	if (this->grid != nullptr)
 	{
-		for (unsigned int i = 0; i < cols; i++)
+		for (unsigned int i = 0; i < rows; i++)
 		{
 			delete[] this->grid[i];
-			grid[i] = nullptr;
 		}
 		delete[] this->grid;
-		grid = nullptr;
 	}
 }
 
@@ -164,7 +162,7 @@ void saveToPPM(const Fractal& fractal, const string& name)
 	cout << "> Saving Fractal to PPM file..." << endl;
 	output << "P3" << endl;
 	output << fractal.rows << " " << fractal.cols << endl;
-	output << "255" << endl;
+	output << fractal.maxIter << endl;
 
 	for (unsigned int i = 0; i < fractal.rows; i++)
 	{
